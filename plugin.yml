@@ -1,0 +1,9 @@
+name: PayAll
+main: PayAll\Main
+author: LePandiLP
+version: 1.0.0
+api: 3.0.0
+
+commands:
+  payall:
+    description: Pay money to all online players!
