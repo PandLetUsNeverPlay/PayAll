@@ -5,4 +5,5 @@ branches:
 projects:
   PayAll:
     path: ""
+    icon: assets/icon.png
 ...
