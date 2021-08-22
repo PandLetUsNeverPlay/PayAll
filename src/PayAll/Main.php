@@ -9,11 +9,17 @@ use onebone\economyapi\EconomyAPI;
 use pocketmine\event\Listener;
 use pocketmine\Server;
 use pocketmine\Player;
+use pocketmine\utils\Config;
 
 class Main extends PluginBase implements Listener{
 
 	public function onEnable(){
+		$this->getConfig();
+                @mkdir($this->getDataFolder());
+                $this->saveResource("config.yml");
+		$this->saveDefaultConfig();
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
+		$this->getLogger()->info("§aPayAll by PandLetUsNeverPlay was loaded!");
 	}
 	
 	public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args):bool{
@@ -36,9 +42,8 @@ class Main extends PluginBase implements Listener{
 				return true;
 			}
 			foreach($this->getServer()->getOnlinePlayers() as $p){
-					$p->sendMessage("§l§6$name payed §b$betrag §6to all online players!");
-					
-					$p->addTitle("§l§aPayAll §f: §b$betrag");
+					$p->sendMessage(str_replace(["{player}"], [$sender], $this->getConfig()->get("payall-message")));
+					$p->addTitle(str_replace(["{count}"], [$betrag], $this->getConfig()->get("payall-tite")));
 					EconomyAPI::getInstance()->addMoney($p, $betrag);
 			}
 			EconomyAPI::getInstance()->reduceMoney($sender, $betrag * $count);
