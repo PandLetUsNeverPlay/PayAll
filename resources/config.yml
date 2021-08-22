@@ -1,0 +1,5 @@
+#Message which is in the chat, when a player starts a payall
+payall-message: §l§3{player} started a payall!
+
+#Title in the screen, when a player starts a payall
+payall-title: §l§bPayAll §8: §g{count}$
